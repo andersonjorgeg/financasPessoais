@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import * as C from './App.styles';
 
-function App() {
+// importando os types
+import { Item } from './types/Item';
+import { Category } from './types/Category';
+
+// importando os dados
+import { items } from './data/items';
+import { categories } from './data/categories';
+
+// importando funções helpers
+import { getCurrentMoth, filterListByMonth } from './helpers/dateFilter';
+
+// importando os componentes
+import { TableArea } from './components/TableArea';
+
+export const App = ()=> {
+
+  // pegando a lista de items
+  const [list, setList] = useState(items);
+  // filtrando a lista de items
+  const [filteredList, setFilteredList] = useState<Item[]>([]);
+  // pegando o ano e a data atual
+  const [currentMonth, setCurrentMonth] = useState(getCurrentMoth());
+
+  // monitorando a lista de items e o mês atual
+  useEffect(() => {
+    setFilteredList(filterListByMonth(list, currentMonth));
+  }, [list, currentMonth]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Header>
+        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+      </C.Header>
+      <C.Body>
+
+        {/* área de informações */}
+
+        {/* área de inserção de informações */}
+
+        {/* Tabela de itens */}
+        <TableArea />
+
+      </C.Body>
+    </C.Container>
   );
 }
-
-export default App;
