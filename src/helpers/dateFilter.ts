@@ -28,3 +28,23 @@ export const filterListByMonth = (list: Item[], date: string): Item[] => {
   // retornar a lista filtrada
   return newList;
 };
+
+//formatar a data
+export const formatDate = (date: Date): string => {
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+
+  return `${addZeroToDate(day)}/${addZeroToDate(month)}/${year}`;
+}
+
+// formatar numero menor que 10 para data
+const addZeroToDate = (numero: number): string => numero < 10 ? `0${numero}` : `${numero}`;
+
+//formatar moeda
+export const formatCurrency = (value: number): string => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(value);
+};

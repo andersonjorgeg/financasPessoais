@@ -23,6 +23,7 @@ export const App = ()=> {
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   // pegando o ano e a data atual
   const [currentMonth, setCurrentMonth] = useState(getCurrentMoth());
+  console.log(currentMonth);
 
   // monitorando a lista de items e o mês atual
   useEffect(() => {
@@ -41,7 +42,7 @@ export const App = ()=> {
         {/* área de inserção de informações */}
 
         {/* Tabela de itens */}
-        <TableArea />
+        <TableArea list={filteredList}/>
 
       </C.Body>
     </C.Container>
