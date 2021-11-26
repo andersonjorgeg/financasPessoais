@@ -48,3 +48,13 @@ export const formatCurrency = (value: number): string => {
     currency: 'BRL'
   }).format(value);
 };
+
+//formatar mês
+export const formatCurrentMonth = (currentMonth: string): string => {
+  // pegar mês e ano atual
+  let [year, month] = currentMonth.split('-');
+  // criar uma lista de meses do ano
+  let months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  // retornar o mês em português e o ano
+  return `${months[Number(month) - 1]} de ${year}`;
+};

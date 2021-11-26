@@ -14,6 +14,7 @@ import { getCurrentMoth, filterListByMonth } from './helpers/dateFilter';
 
 // importando os componentes
 import { TableArea } from './components/TableArea';
+import { InfoArea } from './components/InfoArea';
 
 export const App = ()=> {
 
@@ -23,7 +24,6 @@ export const App = ()=> {
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   // pegando o ano e a data atual
   const [currentMonth, setCurrentMonth] = useState(getCurrentMoth());
-  console.log(currentMonth);
 
   // monitorando a lista de items e o mês atual
   useEffect(() => {
@@ -38,6 +38,7 @@ export const App = ()=> {
       <C.Body>
 
         {/* área de informações */}
+        <InfoArea currentMonth={currentMonth}/>
 
         {/* área de inserção de informações */}
 
