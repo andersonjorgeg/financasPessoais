@@ -24,11 +24,38 @@ export const App = ()=> {
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   // pegando o ano e a data atual
   const [currentMonth, setCurrentMonth] = useState(getCurrentMoth());
-
+  // pegando a receita
+  const [income, setIncome] = useState(0);
+  // pegando a despesa
+  const [expense, setExpense] = useState(0);
+ 
   // monitorando a lista de items e o mês atual
   useEffect(() => {
     setFilteredList(filterListByMonth(list, currentMonth));
   }, [list, currentMonth]);
+
+  // monitorando a lista de items com os valores de receita e despesa
+  useEffect(() => {
+    let incomeCount = 0;
+    let expenseCount = 0;
+
+    for(let i in filteredList) {
+      if(categories[filteredList[i].category].expense){
+        expenseCount += filteredList[i].value;
+      } else {
+        incomeCount += filteredList[i].value;
+      }
+    }
+
+    setIncome(incomeCount);
+    setExpense(expenseCount);
+  }, [filteredList]);
+
+  // lida com o evento de mudança de mês
+  const handleMonthChange = (newMoth: string) => {
+    // atualizando o mês
+    setCurrentMonth(newMoth);
+  }
 
   return (
     <C.Container>
@@ -38,7 +65,12 @@ export const App = ()=> {
       <C.Body>
 
         {/* área de informações */}
-        <InfoArea currentMonth={currentMonth}/>
+        <InfoArea 
+          currentMonth={currentMonth}
+          onMonthChange={handleMonthChange} 
+          income={income} 
+          expense={expense}
+        />
 
         {/* área de inserção de informações */}
 
