@@ -53,7 +53,10 @@ export const InfoArea = ({ currentMonth, onMonthChange, income, expense }: Props
         <ResumeItem 
           title="Saldo" 
           value={income - expense} 
-          color={((income - expense) > 0 ? 'green' : 'red')}
+          color={(
+            (income - expense) > 0 ? 'green' : 
+            (income - expense) < 0 ? 'red' : 'black'
+          )}
         />
       </C.ResumeArea>
     </C.Container>

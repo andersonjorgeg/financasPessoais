@@ -3,7 +3,6 @@ import * as C from './App.styles';
 
 // importando os types
 import { Item } from './types/Item';
-import { Category } from './types/Category';
 
 // importando os dados
 import { items } from './data/items';
@@ -14,6 +13,7 @@ import { getCurrentMoth, filterListByMonth } from './helpers/dateFilter';
 
 // importando os componentes
 import { TableArea } from './components/TableArea';
+import { InputArea } from './components/InputArea';
 import { InfoArea } from './components/InfoArea';
 
 export const App = ()=> {
@@ -57,6 +57,12 @@ export const App = ()=> {
     setCurrentMonth(newMoth);
   }
 
+  // lida com o evento de adicionar um novo item
+  const handleAddItem = (item: Item) => {
+    // adicionando o item na lista
+    setList([...list, item]);
+  }
+
   return (
     <C.Container>
       <C.Header>
@@ -73,6 +79,7 @@ export const App = ()=> {
         />
 
         {/* área de inserção de informações */}
+        <InputArea onAdd={handleAddItem} />
 
         {/* Tabela de itens */}
         <TableArea list={filteredList}/>
